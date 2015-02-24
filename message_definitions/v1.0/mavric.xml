@@ -2,7 +2,62 @@
 <mavlink>
     <include>common.xml</include>
 	<enums>
+		
+	  <!-- ardupilot specific MAV_CMD_* commands -->
+          <enum name="MAV_CMD">
+            <entry name="MAV_CMD_SET_SCENARIO" value="501">
+              <description>Mission command to set the scenario</description>
+              <param index="1">scenario number</param>
+              <param index="2">Empty</param>
+              <param index="3">Empty</param>
+              <param index="4">Empty</param>
+              <param index="5">Empty</param>
+              <param index="6">Empty</param>
+              <param index="7">Empty</param>
+            </entry>
+            <entry name="MAV_CMD_SET_STRATEGY" value="502">
+              <description>Mission command to set the collision avoidance strategy</description>
+              <param index="1">strategy number</param>
+              <param index="2">Empty</param>
+              <param index="3">Empty</param>
+              <param index="4">Empty</param>
+              <param index="5">Empty</param>
+              <param index="6">Empty</param>
+              <param index="7">Empty</param>
+            </entry>
+	    <entry name="MAV_CMD_SET_COLL_AVOID_PARAM" value="503">
+              <description>Sets the collision avoidance parameters</description>
+              <param index="1">Param 1 (depends on the strategy)</param>
+              <param index="2">Param 2 (depends on the strategy)</param>
+              <param index="3">Param 3 (depends on the strategy)</param>
+              <param index="4">Param 4 (depends on the strategy)</param>
+              <param index="5">Param 5 (depends on the strategy)</param>
+              <param index="6">Param 6 (depends on the strategy)</param>
+              <param index="7">Param 7 (depends on the strategy)</param>
+            </entry>
+	    <entry name="MAV_CMD_TOGGLE_DATA_LOG" value="504">
+              <description>Starts/stops SD card data logging</description>
+              <param index="1">Start/stop (0=stop, 1=start)</param>
+              <param index="2">Empty</param>
+              <param index="3">Empty</param>
+              <param index="4">Empty</param>
+              <param index="5">Empty</param>
+              <param index="6">Empty</param>
+              <param index="7">Empty</param>
+            </entry>
+	    <entry name="MAV_CMD_SET_MANUAL_CTRL" value="505">
+              <description>Starts/stops SD card data logging</description>
+              <param index="1">Activate/disactivate remote control (0=GND station control, 1=Remote control active)</param>
+              <param index="2">Empty</param>
+              <param index="3">Empty</param>
+              <param index="4">Empty</param>
+              <param index="5">Empty</param>
+              <param index="6">Empty</param>
+              <param index="7">Empty</param>
+            </entry>
+          </enum>
 	</enums>
+
 	<messages>
 		<message id="180" name="ROLL_PITCH_YAW_THRUST_SETPOINT">
 			<description>Setpoint in roll, pitch, yaw currently active on the system.</description>
