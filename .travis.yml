@@ -1,44 +1,23 @@
 env:
   global:
-  - secure: Od2ZYUhrfms2EKvWZ+fhiy2aUMKO5v8km9gvRpLs3fQx/Wo23oQwVVx1lNE/bIZ9Uea596d/Y5VnSkZ4r7HRhwyyMw7F2M+5wbW+RIfHN05XaDma3H9ulF94mWQiMrbT9yFur3AeKb+Wwavl6U0bH7/DsFcXLq/z+1GaRNH/Bnc=
+  - secure: p6mG1QLioJkqj8zbKa153eV60igDrasGBed1S9m2n8Ul4yQluhK8BOyrAxCZti2diW4FwpAmOosOjFxBKyFcTgtj1AmKQJdaCpIZnXkllEzNj34mINhNFrsdV2O7/veSsM/LVXpbNuekRACv9OVIp10mghPGct2TGts7aHiCiGm/7XU3+a9GaYKeKKaMrTCRDiDY8SB5xyioCjHdkOKLH9Rqy+ySRCsH7WmNZq9R2jnMij1PKR1DF4iyBYvftJxvq6GYxscyA0Vg/UUfdcKzVayCcUfldsiztD4WbIGEACbPZGVXl0TD8KQD5oGMe5dPDrcoE2+ZCn3qi+r4Ee+R2Hd92miFjQrDNv4Wui7aZiiaFk5CzPnbQmk/hDBZGZ/Sz5mabJAqg60iKU5Qa4mzxOfOkDymk41WEE++SSmZhBlKEKF3wAsZbpzzV1YX/3rnaTC36c4hiSizU0IoB+PWKo2uDXTJFfZRGWVNz0cFL2SZqMb3yeHsDETwJ6yhoLY9wohgf/zdlinPbeLrehdaF8gxUl0PLnyPMs4K+C5DIURRvPUZDh+lkOj9JvltnQprLz1HAf44EWtcCJYF0vYYRIhg6TaG5QjsKJSZaBgWWdtOm7p5CKa9sCBOz/PTfm0lhKU2OAdhoDrrRAqllKeiJxrMat241GLNEoEQ8Csr8QE=
 
 language: python
 python:
-  - "2.6"
-  - "2.7"
-  - "3.2"
-  - "3.3"
+- '2.7'
 script:
-  # NOTE: we must do all testing on the installed python package, not 
-  # on the build tree. Otherwise the testing is invalid and may not
-  # indicate the code actually works
-  #
-  # Set pythonpath
-
-  # install
-  - cd pymavlink
-  - python setup.py build install
-  - cd ..
-
-  # Generate messages
-  - mavgen.py --lang='Python' 	--output=/tmp/ message_definitions/v1.0/common.xml
-  - mavgen.py --lang='C' 	--output=/tmp/ message_definitions/v1.0/common.xml
-  - mavgen.py --lang='CS' 	--output=/tmp/ message_definitions/v1.0/common.xml
-  - mavgen.py --lang='WLua' 	--output=/tmp/ message_definitions/v1.0/common.xml
-  - mavgen.py --lang='Java'	--output=/tmp/ message_definitions/v1.0/common.xml
-  # Avoid `spurious errors` caused by ~/.npm permission issues
-  # ref: https://github.com/travis-ci/travis-ci/issues/2244
-  # ref: https://github.com/npm/npm/issues/4815
-  # Does it already exist? Who owns? What permissions?
-  - ls -lah ~/.npm || mkdir ~/.npm
-  # Make sure we own it
-  # $USER references the current user in Travis env
-  - sudo chown -R $USER ~/.npm
-  - "cd pymavlink/generator/javascript && npm test"
-
-  # Test quaternions
-  - cd $TRAVIS_BUILD_DIR
-  - pymavlink/tools/quaterniontest.py
-
+- cd pymavlink
+- python setup.py build install
+- cd ..
+- "mavgen.py --lang='Python' \t--output=/tmp/ message_definitions/v1.0/common.xml"
+- "mavgen.py --lang='C' \t--output=/tmp/ message_definitions/v1.0/common.xml"
+- "mavgen.py --lang='CS' \t--output=/tmp/ message_definitions/v1.0/common.xml"
+- "mavgen.py --lang='WLua' \t--output=/tmp/ message_definitions/v1.0/common.xml"
+- "mavgen.py --lang='Java'\t--output=/tmp/ message_definitions/v1.0/common.xml"
+- ls -lah ~/.npm || mkdir ~/.npm
+- sudo chown -R $USER ~/.npm
+- cd pymavlink/generator/javascript && npm test
+- cd $TRAVIS_BUILD_DIR
+- pymavlink/tools/quaterniontest.py
 after_success:
-- ./scripts/travis_update_generated_repos.sh
+- "./scripts/travis_update_generated_repos.sh"
