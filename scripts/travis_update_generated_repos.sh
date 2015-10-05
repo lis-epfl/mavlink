@@ -18,22 +18,22 @@ then
 fi
 
 # Do only build master branch
-if [[ $TRAVIS_BRANCH != "master" ]]
+if [[ $TRAVIS_BRANCH != "mavric" ]]
 then
 	exit 0
 fi
 
 # Config for auto-building
 git remote rename origin upstream
-git config --global user.email "bot@pixhawk.org"
-git config --global user.name "PX4BuildBot"
+git config --global user.email "bot@mavric.org"
+git config --global user.name "MavricBot"
 git config --global credential.helper "store --file=$HOME/.git-credentials"
 echo "https://${GH_TOKEN}:@github.com" > $HOME/.git-credentials
 
 # Build C library
 mkdir -p include/mavlink/v1.0
 cd include/mavlink/v1.0
-git clone https://github.com/mavlink/c_library.git
+git clone https://github.com/lis-epfl/mavlink_headers.git
 cd ../../..
 ./scripts/update_c_library.sh
 
