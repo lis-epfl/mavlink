@@ -46,7 +46,7 @@
               <param index="7">Empty</param>
             </entry>
 	    <entry name="MAV_CMD_SET_MANUAL_CTRL" value="505">
-              <description>Starts/stops SD card data logging</description>
+              <description>Activate/disactive remote control</description>
               <param index="1">Activate/disactivate remote control (0=GND station control, 1=Remote control active)</param>
               <param index="2">Empty</param>
               <param index="3">Empty</param>
