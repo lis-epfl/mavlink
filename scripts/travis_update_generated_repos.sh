@@ -14,12 +14,14 @@ fi
 # Do not build pull requests
 if [[ $TRAVIS_PULL_REQUEST != "false" ]]
 then
+	echo -e "Skipping build for pull requests"
 	exit 0
 fi
 
 # Do only build master branch
 if [[ $TRAVIS_BRANCH != "mavric" ]]
 then
+echo -e "Skipping build for branch different from mavric"
 	exit 0
 fi
 
