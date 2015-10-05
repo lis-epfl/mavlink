@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mavlink/mavlink.svg?branch=master)](https://travis-ci.org/mavlink/mavlink)
+[![Build Status](https://travis-ci.org/lis-epfl/mavlink.svg?branch=mavric)](https://travis-ci.org/lis-epfl/mavlink)
 
 ## MAVLink ##
 
