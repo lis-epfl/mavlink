@@ -133,7 +133,9 @@ class DFMessage(object):
                 v /= mul
             values.append(v)
         return struct.pack("BBB", 0xA3, 0x95, self.fmt.type) + struct.pack(self.fmt.msg_struct, *values)
-                
+
+    def get_fieldnames(self):
+        return self._fieldnames
 
 class DFReaderClock():
     '''base class for all the different ways we count time in logs'''
@@ -623,15 +625,19 @@ class DFReader_text(DFReader):
 
     def _parse_next(self):
         '''read one message, returning it as an object'''
+
+        this_line = self.line
         while self.line < len(self.lines):
             s = self.lines[self.line].rstrip()
             elements = s.split(", ")
+            this_line = self.line
             # move to next line
             self.line += 1
             if len(elements) >= 2:
+                # this_line is good
                 break
 
-        if self.line >= len(self.lines):
+        if this_line >= len(self.lines):
             return None
 
         # cope with empty structures
@@ -639,7 +645,7 @@ class DFReader_text(DFReader):
             elements[-1] = ''
             elements.append('')
 
-        self.percent = 100.0 * (self.line / float(len(self.lines)))
+        self.percent = 100.0 * (this_line / float(len(self.lines)))
 
         msg_type = elements[0]
 
