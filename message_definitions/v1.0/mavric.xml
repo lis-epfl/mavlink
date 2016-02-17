@@ -25,7 +25,7 @@
               <param index="6">Empty</param>
               <param index="7">Empty</param>
             </entry>
-	    <entry name="MAV_CMD_SET_COLL_AVOID_PARAM" value="503">
+			<entry name="MAV_CMD_SET_COLL_AVOID_PARAM" value="503">
               <description>Sets the collision avoidance parameters</description>
               <param index="1">Param 1 (depends on the strategy)</param>
               <param index="2">Param 2 (depends on the strategy)</param>
@@ -35,7 +35,7 @@
               <param index="6">Param 6 (depends on the strategy)</param>
               <param index="7">Param 7 (depends on the strategy)</param>
             </entry>
-	    <entry name="MAV_CMD_TOGGLE_DATA_LOG" value="504">
+			<entry name="MAV_CMD_TOGGLE_DATA_LOG" value="504">
               <description>Starts/stops SD card data logging</description>
               <param index="1">Start/stop (0=stop, 1=start)</param>
               <param index="2">Empty</param>
@@ -45,7 +45,7 @@
               <param index="6">Empty</param>
               <param index="7">Empty</param>
             </entry>
-	    <entry name="MAV_CMD_SET_MANUAL_CTRL" value="505">
+			<entry name="MAV_CMD_SET_MANUAL_CTRL" value="505">
               <description>Activate/disactive remote control</description>
               <param index="1">Activate/disactivate remote control (0=GND station control, 1=Remote control active)</param>
               <param index="2">Empty</param>
@@ -106,6 +106,22 @@
 			<field type="float[4]" name="quat">Attitude command</field>
 			<field type="float[3]" name="position">Position command</field>
 			<field type="float[3]" name="velocity">Velocity command</field>
+		</message>
+		<message id="185" name="GIMBAL_COMMAND">
+			<description>Gimbal commands in angle with a state parameter</description>
+			<field type="uint64_t" name="time_usec">Timestamp (microseconds since UNIX epoch or microseconds since system boot)</field>
+			<field type="float[3]" name="angle">Angle command</field>
+			<field type="uint8_t"  name="state">Command the state of the gimbal</field>
+		</message>
+		<message id="186" name="ANGLE_RATE_VELOCITY_SENSORS">
+			<description>Angle, rate and velocity sensors value of the platform</description>
+			<field type="uint64_t" name="time_usec">Timestamp (microseconds since UNIX epoch or microseconds since system boot)</field>
+			<field type="float[3]" name="angle">angle sensors value</field>
+			<field type="float[3]" name="rate">rate sensors value</field>
+			<field type="float" name="velocity_local_x">x velocity in local (body) frame</field>
+			<field type="float" name="velocity_local_y">y velocity in local (body) frame</field>
+			<field type="float" name="velocity_global_z">z velocity in global frame</field>
+			<field type="float" name="yaw_rate_global">yaw rate in global frame</field>
 		</message>
 	</messages>
 </mavlink>
