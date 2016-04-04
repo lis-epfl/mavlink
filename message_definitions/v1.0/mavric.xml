@@ -2,7 +2,7 @@
 <mavlink>
     <include>common.xml</include>
 	<enums>
-		
+
 	  <!-- ardupilot specific MAV_CMD_* commands -->
           <enum name="MAV_CMD">
             <entry name="MAV_CMD_SET_SCENARIO" value="501">
@@ -123,8 +123,11 @@
 			<field type="float" name="velocity_global_z">z velocity in global frame</field>
 			<field type="float" name="yaw_rate_global">yaw rate in global frame</field>
 		</message>
+    <message id="187" name="BIG_DEBUG_VECT">
+			<description>Large debug vector</description>
+			<field type="char[7]" name="name">Name</field>
+      <field type="uint64_t" name="time_usec">Timestamp</field>
+      <field type="float[60]" name="data">data</field>
+    </message>
 	</messages>
 </mavlink>
-
-
-
